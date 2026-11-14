@@ -1,0 +1,31 @@
+
+import { connection } from "next/server";
+import { redirect } from "next/navigation";
+import { getMeetings } from "@/lib/meetings-db";
+
+export const instant = false;
+
+export default async function CurrentMeetingPage() {
+    await connection();
+
+    const today = new Date();
+
+    const sunday = new Date(today);
+    const daysUntilSunday = (7 - today.getDay()) % 7;
+
+    sunday.setDate(today.getDate() + daysUntilSunday);
+
+    const year = sunday.getFullYear();
+    const month = String(sunday.getMonth() + 1).padStart(2, "0");
+    const day = String(sunday.getDate()).padStart(2, "0");
+
+    const sundayDate = `${day}-${month}-${year}`;
+
+    const meetings = getMeetings(sundayDate);
+
+    if (meetings.length === 0) {
+        redirect("/meetings");
+    }
+
+    redirect(`/meetings/${meetings[0].id}`);
+}

@@ -5,6 +5,42 @@
   --foreground: #171717;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+@media print {
+    header,
+    footer,
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    main {
+        padding: 0 !important;
+    }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
