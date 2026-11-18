@@ -21,7 +21,7 @@ export default async function CurrentMeetingPage() {
 
     const sundayDate = `${year}-${month}-${day}`;
 
-    const meetings = getMeetings(sundayDate);
+    const meetings = await getMeetings(undefined, 1, sundayDate);
 
     if (meetings.length === 0) {
         redirect("/meetings");

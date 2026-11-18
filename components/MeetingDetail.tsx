@@ -17,7 +17,13 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
             <p className="text-slate-600">Opening Prayer: {meeting.openingPrayer}</p>
             <p className="text-slate-600">Ward Business</p>
             <ul>
-                {meeting.wardBusiness.map(((business, index) => <li key={index} className="text-slate-600">{business.description}</li>))}
+                {Array.isArray(meeting.wardBusiness) &&
+                    meeting.wardBusiness.map((business, index) => (
+                        <li key={index} className="text-slate-600">
+                            {business.description}
+                        </li>
+                    ))
+                }
             </ul>
             <p className="text-slate-600">Stake Business: {meeting.stakeBusiness}</p>
             <p className="text-slate-600">Sacrament Hymn: {meeting.sacramentHymn.number}, {meeting.sacramentHymn.title}</p>
