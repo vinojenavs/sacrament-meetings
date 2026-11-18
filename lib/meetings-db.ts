@@ -3,7 +3,7 @@ import { SacramentMeeting } from "./types";
 export const meetings: SacramentMeeting[] = [
     {
         id: 1,
-        date: '13-09-2026',
+        date: '2026-09-13',
         meetingType: 'Regular',
         presiding: 'Bishop Okpala',
         conducting: 'Pres. Ejigue',
@@ -21,7 +21,7 @@ export const meetings: SacramentMeeting[] = [
     },
     {
         id: 2,
-        date: '20-09-2026',
+        date: '2026-09-20',
         meetingType: 'Regular',
         presiding: 'Bishop Okpala',
         conducting: 'Pres. Ijabor',
@@ -39,7 +39,7 @@ export const meetings: SacramentMeeting[] = [
     },
     {
         id: 3,
-        date: '27-09-2026',
+        date: '2026-09-27',
         meetingType: 'Regular',
         presiding: 'Bishop Okpala',
         conducting: 'Pres. Ejigue',
@@ -57,7 +57,7 @@ export const meetings: SacramentMeeting[] = [
     },
     {
         id: 4,
-        date: '11-10-2026',
+        date: '2026-10-11',
         meetingType: 'Regular',
         presiding: 'Bishop Frank',
         conducting: 'Pres. Ejigue',
@@ -75,7 +75,7 @@ export const meetings: SacramentMeeting[] = [
     },
     {
         id: 5,
-        date: '15-11-2026',
+        date: '2026-11-15',
         meetingType: 'Regular',
         presiding: 'Stake President',
         conducting: 'Bishop Okpala',
@@ -94,7 +94,7 @@ export const meetings: SacramentMeeting[] = [
     },
     {
         id: 6,
-        date: '22-11-2026',
+        date: '2026-11-22',
         meetingType: 'Regular',
         presiding: 'Stake President',
         conducting: 'Bishop Okpala',

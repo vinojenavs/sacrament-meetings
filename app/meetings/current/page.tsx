@@ -19,7 +19,7 @@ export default async function CurrentMeetingPage() {
     const month = String(sunday.getMonth() + 1).padStart(2, "0");
     const day = String(sunday.getDate()).padStart(2, "0");
 
-    const sundayDate = `${day}-${month}-${year}`;
+    const sundayDate = `${year}-${month}-${day}`;
 
     const meetings = getMeetings(sundayDate);
 
