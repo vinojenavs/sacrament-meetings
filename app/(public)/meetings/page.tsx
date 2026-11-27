@@ -3,12 +3,20 @@ import MeetingSearch from "@/components/MeetingSearch";
 import MeetingCard from "@/components/MeetingCard";
 import type { SacramentMeeting } from "@/lib/types";
 import { getServerBaseUrl } from "@/lib/server-url";
+import { Pagination } from "@/components/Pagination";
+
+type MeetingsResponse = {
+    meetings: SacramentMeeting[];
+    currentPage: number;
+    totalPages: number;
+    totalMeetings: number;
+};
 
 async function fetchMeetings(
     query: string = "",
     page: number = 1,
     date: string = "",
-): Promise<SacramentMeeting[]> {
+): Promise<MeetingsResponse> {
     const baseUrl = await getServerBaseUrl();
     const params = new URLSearchParams({
         query,
@@ -22,7 +30,7 @@ async function fetchMeetings(
     if (!response.ok) {
         throw new Error("Failed to fetch meetings.");
     }
-    return response.json() as Promise<SacramentMeeting[]>;
+    return response.json() as Promise<MeetingsResponse>;
 }
 
 export default async function MeetingsPage(props: {
@@ -35,7 +43,8 @@ export default async function MeetingsPage(props: {
     await connection();
     const { query = "", page = "1", date = "" } = await props.searchParams;
     const currentPage = Math.max(1, Number(page) || 1);
-    const meetings = await fetchMeetings(query, currentPage, date);
+    const data = await fetchMeetings(query, currentPage, date);
+    const { meetings, totalPages } = data
     return (
         <div className="mx-auto max-w-6xl px-6 py-10">
             <div className="mb-8">
@@ -56,6 +65,9 @@ export default async function MeetingsPage(props: {
                         />
                     ))}
                 </div>
+            )}
+            {totalPages > 1 && (
+                <Pagination totalPages={totalPages}/>
             )}
         </div>
     );

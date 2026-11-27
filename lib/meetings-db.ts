@@ -37,19 +37,25 @@ export async function getMeetings(query: string = '', currentPage: number = 1, d
     return rows as unknown as SacramentMeeting[];
 }
 
-export async function getMeetingsTotalPages(
-  query: string = ''
+export async function getMeetingsTotalCount(
+  query: string = '', date: string = ''
 ): Promise<number> {
   const searchTerm = `%${query}%`;
+  const filterDate = date || null;
   const rows = await sql`
     SELECT COUNT(*) FROM meetings
     WHERE
-      presiding     ILIKE ${searchTerm}
-      OR conducting ILIKE ${searchTerm}
-      OR meeting_type ILIKE ${searchTerm}
-      OR speakers::text ILIKE ${searchTerm}
+      (
+        presiding     ILIKE ${searchTerm}
+        OR conducting ILIKE ${searchTerm}
+        OR meeting_type ILIKE ${searchTerm}
+        OR speakers::text ILIKE ${searchTerm}
+      ) AND (
+        ${filterDate}::text IS NULL
+        OR date = ${filterDate}::date
+       )
   `;
-  return Math.ceil(Number(rows[0].count) / ITEMS_PER_PAGE);
+  return Number(rows[0].count);
 }
 
 export async function getMeetingById(id: number): Promise<SacramentMeeting | null> {
